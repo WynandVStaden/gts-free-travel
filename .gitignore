@@ -1,0 +1,4 @@
+build/
+release/
+dist/SKSE/Plugins/*.dll
+*.obj
