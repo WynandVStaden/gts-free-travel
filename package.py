@@ -2,13 +2,12 @@
 import pathlib
 import zipfile
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 ROOT = pathlib.Path(__file__).resolve().parent
 DIST = ROOT / "dist"
 FILES = [
     "SKSE/Plugins/Journeyman.dll",
     "SKSE/Plugins/GetLost.dll",
-    "SKSE/Plugins/SurvivalModeImproved.ini",
 ]
 
 out = ROOT / "release" / f"GTS Free Travel-{VERSION}.zip"

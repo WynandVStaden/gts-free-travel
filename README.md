@@ -4,7 +4,7 @@ Gives you back vanilla fast travel and the "you are here" marker on the map in a
 [Gate to Sovngarde](https://www.nexusmods.com/skyrimspecialedition/mods/97490) setup, without
 removing any mod from the collection.
 
-> **Status:** version 1.0.0 is built and its plugins pass the loading checks in `test/`, but it has
+> **Status:** version 1.0.1 is built and its plugins pass the loading checks in `test/`, but it has
 > not been play-tested in the game yet.
 
 ## What it changes
@@ -13,7 +13,7 @@ removing any mod from the collection.
 |---|---|---|
 | Fast travel needs a travel pack | Journeyman (`Journeyman.dll`) | Replaces the DLL with one that does nothing |
 | Your position is hidden on the map | Get Lost (`GetLost.dll`) | Replaces the DLL with one that does nothing |
-| Fast travel is disabled in Survival Mode | Survival Mode Improved (`SurvivalModeImproved.ini`) | Ships the same ini with `bDisableFastTravel=0` |
+| Fast travel is disabled in Survival Mode | Survival Mode Improved (`SurvivalModeImproved.ini`) | Nothing: you change one line yourself, see below |
 
 Everything else those three mods add stays: their plugins (`.esp`), scripts, items and recipes.
 That matters because other mods and patches in the collection list `Journeyman.esp` as a master,
@@ -34,17 +34,21 @@ those mods. Renaming or deleting the original DLLs by hand does not.
 
 - Skyrim Special Edition with SKSE. Works on 1.5.97, 1.6.x and Skyrim VR: the replacement plugins
   touch no game code, so they do not depend on the game version or on Address Library.
-- Journeyman, Get Lost and Survival Mode Improved installed (they are part of Gate to Sovngarde).
-  If one of them is missing, the matching file here simply does nothing.
+- Journeyman and Get Lost installed (they are part of Gate to Sovngarde). If one of them is
+  missing, the matching file here simply does nothing.
 
 ## Install
 
 1. Install with your mod manager like any other mod.
-2. Make sure it **overrides** Journeyman, Get Lost and Survival Mode Improved:
+2. Make sure it **overrides** Journeyman and Get Lost:
    - **Vortex**: when the file-conflict notification appears, set *GTS Free Travel* to load
-     **after** each of the three.
+     **after** both.
    - **Mod Organizer 2**: place it below them in the left pane.
-3. Deploy and start the game through SKSE as usual.
+3. Open `SKSE\Plugins\SurvivalModeImproved.ini` (it belongs to Survival Mode Improved) and change
+   `bDisableFastTravel=1` to `bDisableFastTravel=0`. This file is not included here because it is
+   another author's work. A reinstall or update of Survival Mode Improved resets it, so check this
+   line first if fast travel stops working.
+4. Deploy and start the game through SKSE as usual.
 
 ## Check that it is active
 
@@ -60,13 +64,11 @@ If the original names appear instead, this mod is not winning the conflict.
 
 ## Uninstall
 
-Remove the mod and deploy. The original DLLs and ini take over again; nothing is baked into the save.
+Remove the mod and deploy. The original DLLs take over again; nothing is baked into the save. Set
+`bDisableFastTravel` back to `1` if you want Survival Mode to block fast travel again.
 
 ## Notes
 
-- `SurvivalModeImproved.ini` is the file from Survival Mode Improved 1.6.6 with one value changed.
-  If a later version of that mod adds settings, they will be missing from this copy until it is
-  updated.
 - Get Lost's Papyrus function `GetLost.RevealMapMarkersOnMap` is not available while its DLL is
   replaced. Scripts that call it will log an error and carry on.
 
