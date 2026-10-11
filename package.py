@@ -2,7 +2,7 @@
 import pathlib
 import zipfile
 
-VERSION = "1.0.1"
+VERSION = "1.1.0"
 ROOT = pathlib.Path(__file__).resolve().parent
 DIST = ROOT / "dist"
 FILES = [

@@ -15,7 +15,7 @@ if not exist "%OBJ%" mkdir "%OBJ%"
 
 for %%N in (Journeyman GetLost) do (
     cl /nologo /O1 /GS- /W4 /WX /c /DSTUB_NAME=\"%%N\" /Fo"%OBJ%\%%N.obj" "%ROOT%src\stub.c" || exit /b 1
-    link /nologo /DLL /NOENTRY /NODEFAULTLIB /MACHINE:X64 /OUT:"%OUT%\%%N.dll" /IMPLIB:"%OBJ%\%%N.lib" "%OBJ%\%%N.obj" || exit /b 1
+    link /nologo /DLL /ENTRY:DllMain /NODEFAULTLIB /MACHINE:X64 /OUT:"%OUT%\%%N.dll" /IMPLIB:"%OBJ%\%%N.lib" "%OBJ%\%%N.obj" kernel32.lib || exit /b 1
 )
 
 echo Built:

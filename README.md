@@ -6,7 +6,7 @@ removing any mod from the collection.
 
 **Download:** [Nexus Mods](https://www.nexusmods.com/skyrimspecialedition/mods/194952) or the [releases](https://github.com/WynandVStaden/gts-free-travel/releases) here.
 
-> **Status:** version 1.0.1 is built and its plugins pass the loading checks in `test/`, but it has
+> **Status:** version 1.1.0 is built and its plugins pass the loading checks in `test/`, but it has
 > not been play-tested in the game yet.
 
 ## What it changes
@@ -15,7 +15,7 @@ removing any mod from the collection.
 |---|---|---|
 | Fast travel needs a travel pack | Journeyman (`Journeyman.dll`) | Replaces the DLL with one that does nothing |
 | Your position is hidden on the map | Get Lost (`GetLost.dll`) | Replaces the DLL with one that does nothing |
-| Fast travel is disabled in Survival Mode | Survival Mode Improved (`SurvivalModeImproved.ini`) | Nothing: you change one line yourself, see below |
+| Fast travel is disabled in Survival Mode | Survival Mode Improved (`SurvivalModeImproved.ini`) | Sets `bDisableFastTravel=0` in that ini every time the game starts |
 
 Everything else those three mods add stays: their plugins (`.esp`), scripts, items and recipes.
 That matters because other mods and patches in the collection list `Journeyman.esp` as a master,
@@ -35,7 +35,7 @@ those mods. Renaming or deleting the original DLLs by hand does not.
 ## Requirements
 
 - Skyrim Special Edition with SKSE. Works on 1.5.97, 1.6.x and Skyrim VR: the replacement plugins
-  touch no game code, so they do not depend on the game version or on Address Library.
+  touch no game code or memory, so they do not depend on the game version or on Address Library.
 - Journeyman and Get Lost installed (they are part of Gate to Sovngarde). If one of them is
   missing, the matching file here simply does nothing.
 
@@ -46,11 +46,23 @@ those mods. Renaming or deleting the original DLLs by hand does not.
    - **Vortex**: when the file-conflict notification appears, set *GTS Free Travel* to load
      **after** both.
    - **Mod Organizer 2**: place it below them in the left pane.
-3. Open `SKSE\Plugins\SurvivalModeImproved.ini` (it belongs to Survival Mode Improved) and change
-   `bDisableFastTravel=1` to `bDisableFastTravel=0`. This file is not included here because it is
-   another author's work. A reinstall or update of Survival Mode Improved resets it, so check this
-   line first if fast travel stops working.
-4. Deploy and start the game through SKSE as usual.
+3. Deploy and start the game through SKSE as usual.
+
+There is nothing to edit by hand. See "The Survival Mode Improved setting" below for what happens
+to its ini.
+
+## The Survival Mode Improved setting
+
+Survival Mode Improved blocks fast travel with `bDisableFastTravel=1` in its
+`SurvivalModeImproved.ini`. That file belongs to another author, so it is not shipped here.
+Instead, each replacement plugin checks that ini when the game loads it and, if the value is not
+`0`, rewrites that single line. Nothing else in the file is touched, and if the value is already
+`0` the file is not written at all. This happens before Survival Mode Improved itself is loaded,
+and it repeats on every start, so an update or reinstall of Survival Mode Improved cannot switch
+fast travel off again.
+
+If you use Mod Organizer 2, the changed ini ends up in your Overwrite folder, as with any file a
+plugin writes.
 
 ## Check that it is active
 
@@ -66,8 +78,9 @@ If the original names appear instead, this mod is not winning the conflict.
 
 ## Uninstall
 
-Remove the mod and deploy. The original DLLs take over again; nothing is baked into the save. Set
-`bDisableFastTravel` back to `1` if you want Survival Mode to block fast travel again.
+Remove the mod and deploy. The original DLLs take over again; nothing is baked into the save. The
+ini keeps `bDisableFastTravel=0`; set it back to `1` if you want Survival Mode to block fast
+travel again.
 
 ## Notes
 
