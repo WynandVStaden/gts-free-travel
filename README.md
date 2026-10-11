@@ -4,6 +4,8 @@ Gives you back vanilla fast travel and the "you are here" marker on the map in a
 [Gate to Sovngarde](https://www.nexusmods.com/skyrimspecialedition/mods/97490) setup, without
 removing any mod from the collection.
 
+**Download:** [Nexus Mods](https://www.nexusmods.com/skyrimspecialedition/mods/194952) or the [releases](https://github.com/WynandVStaden/gts-free-travel/releases) here.
+
 > **Status:** version 1.0.1 is built and its plugins pass the loading checks in `test/`, but it has
 > not been play-tested in the game yet.
 
