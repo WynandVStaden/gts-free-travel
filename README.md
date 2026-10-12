@@ -6,8 +6,8 @@ removing any mod from the collection.
 
 **Download:** [Nexus Mods](https://www.nexusmods.com/skyrimspecialedition/mods/194952) or the [releases](https://github.com/WynandVStaden/gts-free-travel/releases) here.
 
-> **Status:** version 1.1.0 is built and its plugins pass the loading checks in `test/`, but it has
-> not been play-tested in the game yet.
+> **Status:** version 1.1.0 passes the loading checks in `test/` and was tested in game on
+> 12 October 2026 on a Gate to Sovngarde setup (Skyrim 1.6.1170, Survival Mode Improved 1.6.6).
 
 ## What it changes
 
